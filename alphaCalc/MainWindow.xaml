@@ -1,0 +1,83 @@
+﻿<Window x:Class="alphaCalc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        xmlns:local="clr-namespace:alphaCalc"
+        mc:Ignorable="d"
+        KeyUp="OnKeyDown" 
+        Title="aphaCalc" Height="450" Width="300">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/alphaCalc;component/Resources/Styles/ControlStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height=".8*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="青" Click="Blue" />
+            <MenuItem Header="黒" Click="Black" />
+            <MenuItem Header="緑" Click="Green" />
+            <MenuItem Header="桃" Click="Pink" />
+            <MenuItem Header="橙" Click="Orange" />
+
+        </Menu>
+        <!-- テキスト表示エリア -->
+            <Viewbox Grid.Row="1" HorizontalAlignment="Right">
+                <TextBlock x:Name="FormulaText" Text="aaaaa" Style="{DynamicResource CalcText1}"/>
+            </Viewbox>
+            <Viewbox Grid.Row="2" HorizontalAlignment="Right">
+            <TextBlock x:Name="ResultText" Text="bbbb" Style="{DynamicResource CalcText2}"/>
+            </Viewbox>
+        <!-- キーボードエリア -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".2*" />
+                <ColumnDefinition Width=".2*" />
+                <ColumnDefinition Width=".2*" />
+                <ColumnDefinition Width=".01*" />
+                <ColumnDefinition Width=".2*" />
+                <ColumnDefinition Width=".2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".2*" />
+                <RowDefinition Height=".2*" />
+                <RowDefinition Height=".2*" />
+                <RowDefinition Height=".2*" />
+                <RowDefinition Height=".2*" />
+            </Grid.RowDefinitions>
+            <Button x:Name="k_ca" Content="CA" Grid.Row="0" Grid.Column="0" Margin="3,3" Style="{DynamicResource OperateButton}" Click="OpeClick"/>
+            <Button x:Name="k_c" Content="C" Grid.Row="0" Grid.Column="1" Margin="3,3" Style="{DynamicResource OperateButton}"/>
+            <Button x:Name="k_7" Content="7" Grid.Row="1" Grid.Column="0" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_8" Content="8" Grid.Row="1" Grid.Column="1" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_9" Content="9" Grid.Row="1" Grid.Column="2" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_4" Content="4" Grid.Row="2" Grid.Column="0" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_5" Content="5" Grid.Row="2" Grid.Column="1" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_6" Content="6" Grid.Row="2" Grid.Column="2" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_1" Content="1" Grid.Row="3" Grid.Column="0" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_2" Content="2" Grid.Row="3" Grid.Column="1" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_3" Content="3" Grid.Row="3" Grid.Column="2" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_0" Content="0" Grid.Row="4" Grid.Column="0" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_00" Content="00" Grid.Row="4" Grid.Column="1" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_dot" Content="." Grid.Row="4" Grid.Column="2" Margin="3,3" Style="{DynamicResource CalcButton}" Click="NumClick"/>
+            <Button x:Name="k_percent" Content="％" Grid.Row="1" Grid.Column="4" Margin="3,3" Style="{DynamicResource OperateButton}"/>
+            <Button x:Name="k_mult" Content="×" Grid.Row="2" Grid.Column="4" Margin="3,3" Style="{DynamicResource OperateButton}"  Click="OpeClick"/>
+            <Button x:Name="k_plus" Content="＋" Grid.Row="3" Grid.Column="4" Grid.RowSpan="2" Margin="3,3" Style="{DynamicResource OperateButton}" Click="OpeClick"/>
+            <Button x:Name="k_back" Content="←" Grid.Row="1" Grid.Column="5" Margin="3,3" Style="{DynamicResource OperateButton}" Click="NumClick"/>
+            <Button x:Name="k_per" Content="÷" Grid.Row="2" Grid.Column="5" Margin="3,3" Style="{DynamicResource OperateButton}"  Click="OpeClick"/>
+            <Button x:Name="k_minus" Content="－" Grid.Row="3" Grid.Column="5" Margin="3,3" Style="{DynamicResource OperateButton}" Click="OpeClick" />
+            <Button x:Name="k_equal" Content="＝" Grid.Row="4" Grid.Column="5" Margin="3,3" Style="{DynamicResource OperateButton}" Click="OpeClick"/>
+
+        </Grid>
+    </Grid>
+</Window>
