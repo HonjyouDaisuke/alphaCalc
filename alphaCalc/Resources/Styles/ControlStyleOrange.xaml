@@ -135,7 +135,13 @@
     </Style>
 
     <Style x:Key="CalcText2" TargetType="{x:Type TextBlock}" >
-        <Setter Property="Foreground" Value="DarkGoldenrod" />
+        <Setter Property="Foreground" Value="LightGoldenrodYellow" />
         <Setter Property="FontSize" Value="32" />
+    </Style>
+
+    <Style x:Key="MainMenu" TargetType="{x:Type Menu}" >
+        <Setter Property="Foreground" Value="DarkGoldenrod" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Background" Value="AliceBlue" />
     </Style>
 </ResourceDictionary>
