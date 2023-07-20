@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,12 +21,21 @@ namespace alphaCalc
     /// </summary>
     public partial class History : Window
     {
-        HistoryData data;
-        public History()
+        HistoryData data = new HistoryData();
+        public History(string themeName)
         {
             InitializeComponent();
+            var dictionary = new ResourceDictionary();
+            dictionary.Source = new Uri(@$"Resources/Styles/ControlStyle{themeName}.xaml", UriKind.Relative);
+            this.Resources.MergedDictionaries.Clear();
+            this.Resources.MergedDictionaries.Add(dictionary);
         }
-        
+
+        /// <summary>
+        /// 2023.07.20 D.Honjyou
+        /// 履歴データをセット
+        /// </summary>
+        /// <param name="historyData"></param>
         public void setHistory(HistoryData historyData)
         {
             data = historyData; 
@@ -35,6 +46,12 @@ namespace alphaCalc
             }
         }
 
+        /// <summary>
+        /// 2023.07.20 D.Honjyou
+        /// 履歴をクリップボードに保存する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_CopyClick(object sender, RoutedEventArgs e)
         {
             string Clip = "";
@@ -46,9 +63,35 @@ namespace alphaCalc
             Clipboard.SetText(Clip);
         }
 
+        /// <summary>
+        /// 2023.07.20 D.Honjyou
+        /// ファイルに保存メニュー
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_SaveClick(object sender, RoutedEventArgs e)
         {
+            // ダイアログのインスタンスを生成
+            var dialog = new SaveFileDialog();
 
+            // ファイルの種類を設定
+            dialog.Filter = "テキストファイル (*.txt)|*.txt|全てのファイル (*.*)|*.*";
+
+            // ダイアログを表示する
+            if (dialog.ShowDialog() == true)
+            {
+                //　using文を使ってファイルをクローズするコード
+
+                using (StreamWriter writer = new StreamWriter(dialog.FileName))
+                {
+                    foreach (string hist in data.HistoryDataList)
+                    {
+                        // ファイルに書き込む
+                        writer.WriteLine(hist + "\n");
+                    }
+                }// 完了をメッセージボックスに表示
+                MessageBox.Show("保存しました。", "alphaCalc", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

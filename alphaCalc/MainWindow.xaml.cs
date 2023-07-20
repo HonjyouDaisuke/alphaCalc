@@ -23,12 +23,14 @@ namespace alphaCalc
     public partial class MainWindow : Window
     {
         CalcManager cManage = new CalcManager();
+        string _themeName = "";
 
         public MainWindow()
         {
             InitializeComponent();
-            
-            SwitchTheme("Blue");
+
+            _themeName = "Blue";
+            SwitchTheme(_themeName);
             mThemeBlue.IsChecked = true;
             k_back.IsEnabled = false;
         }
@@ -88,7 +90,6 @@ namespace alphaCalc
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             int test_num;
-            string s;
             bool bShift = false;
 
             System.Diagnostics.Debug.WriteLine($"KeyBoard={e.Key.ToString()}");
@@ -206,7 +207,8 @@ namespace alphaCalc
         {
             ThemeCheckOff();
             mThemeBlue.IsChecked = true;
-            SwitchTheme("Blue");
+            _themeName = "Blue";
+            SwitchTheme(_themeName);
         }
 
         /// <summary>
@@ -219,7 +221,8 @@ namespace alphaCalc
         {
             ThemeCheckOff();
             mThemeBlack.IsChecked = true;
-            SwitchTheme("");
+            _themeName = "";
+            SwitchTheme(_themeName);
 
             //((App)Application.Current).ChangeTheme("");
         }
@@ -234,7 +237,8 @@ namespace alphaCalc
         {
             ThemeCheckOff();
             mThemePink.IsChecked = true;
-            SwitchTheme("Pink");
+            _themeName = "Pink";
+            SwitchTheme(_themeName);
 
             //((App)Application.Current).ChangeTheme("");
         }
@@ -249,7 +253,8 @@ namespace alphaCalc
         {
             ThemeCheckOff();
             mThemeGreen.IsChecked = true;
-            SwitchTheme("Green");
+            _themeName = "Green";
+            SwitchTheme(_themeName);
 
             //((App)Application.Current).ChangeTheme("");
         }
@@ -264,7 +269,8 @@ namespace alphaCalc
         {
             ThemeCheckOff();
             mThemeOrange.IsChecked = true;
-            SwitchTheme("Orange");
+            _themeName = "Orange";
+            SwitchTheme(_themeName);
 
             //((App)Application.Current).ChangeTheme("");
         }
@@ -277,8 +283,8 @@ namespace alphaCalc
         /// <param name="e"></param>
         private void Hist(object sender, RoutedEventArgs e)
         {
-            History histWindow = new History();
-            cManage.setNowHist();
+            History histWindow = new History(_themeName);
+            //cManage.setNowHist();
             histWindow.setHistory(cManage.History);
             histWindow.Show();
         }

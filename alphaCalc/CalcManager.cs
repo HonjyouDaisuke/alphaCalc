@@ -47,6 +47,10 @@ namespace alphaCalc
             History.AddHistData(_currentFormula);
         }
 
+        /// <summary>
+        /// 2023.07.17 D.Honjyou
+        /// 現在の計算をリセットする
+        /// </summary>
         public void ResetCalc()
         {
             History.AddHistData($"{_currentFormula} = {_currentResult}" );
@@ -60,7 +64,12 @@ namespace alphaCalc
             _currentOperate.SetOperate("");
         }
 
-
+        /// <summary>
+        /// 2023.07.17 D.Honjyou
+        /// 数字キーが入力された時にデータ管理する
+        /// </summary>
+        /// <param name="num">入力されたキー</param>
+        /// <returns></returns>
         public bool AddNumber(string num)
         {
             bool result = false;
@@ -189,14 +198,11 @@ namespace alphaCalc
             System.Diagnostics.Debug.WriteLine($"★{op}, {_currentOperate.GetOperate()}");
             if(_currentOperate.GetOperate() == Operates.Operate_CA)
             {
-                _currentFormula = "";
-                _currentNum = 0;
-                _currentNumString = "0";
-                _currentResult = 0;
-                _preNum = 0;
-                _preOperate.SetOperate("");
-                _preMode = 0;
-                _currentOperate.SetOperate("");
+                if(_currentFormula.Length > 0)
+                {
+                    ResetCalc();
+                }
+                
                 return result;
             }
             if (_currentOperate.GetOperate() == Operates.Operate_C)

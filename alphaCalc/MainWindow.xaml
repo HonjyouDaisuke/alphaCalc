@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         ui:WindowHelper.UseModernWindowStyle="True"
         xmlns:local="clr-namespace:alphaCalc"
@@ -19,21 +20,35 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".1*" />
+            <RowDefinition Height="24" />
             <RowDefinition Height="30" />
             <RowDefinition Height="50" />
-            <RowDefinition Height=".8*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource MainMenu}" >
+        <Menu Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource MainMenu}">
+            <MenuItem Header="コピー" Click="CopyResultClick">
+                <MenuItem.Icon>
+                    <iconPacks:PackIconOcticons Kind="Clippy"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="履歴" Click="Hist">
+                <MenuItem.Icon>
+                    <iconPacks:PackIconMaterial Kind="History"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
             <MenuItem Header="テーマ">
+                <MenuItem.Icon>
+                    <iconPacks:PackIconPicolIcons Kind="BrowserWindowSettings" />
+                </MenuItem.Icon>
                 <MenuItem x:Name="mThemeBlack" Header="Black" Foreground="Black" Click="Theme_Black" />
                 <MenuItem x:Name="mThemeBlue" Header="Blue" Foreground="RoyalBlue" Click="Theme_Blue" IsCheckable="True"/>
                 <MenuItem x:Name="mThemePink" Header="Pink" Foreground="DeepPink" Click="Theme_Pink" />
                 <MenuItem x:Name="mThemeGreen" Header="Green" Foreground="DarkGreen" Click="Theme_Green" />
                 <MenuItem x:Name="mThemeOrange" Header="Orange" Foreground="DarkOrange" Click="Theme_Orange" />
             </MenuItem>
-            <MenuItem Header="コピー" Click="CopyResultClick" />
-            <MenuItem Header="履歴" Click="Hist" />
+
         </Menu>
         <!-- テキスト表示エリア -->
             <Viewbox Grid.Row="1" HorizontalAlignment="Right">
