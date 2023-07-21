@@ -18,6 +18,11 @@ namespace alphaCalc
             _historyDataList = new ArrayList();
         }
 
+        /// <summary>
+        /// 2023.07.21 D.Honjyou
+        /// 履歴データを追加
+        /// </summary>
+        /// <param name="data"></param>
         public void AddHistData(string data)
         {
             _historyDataList.Add(data);

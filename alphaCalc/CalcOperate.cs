@@ -33,11 +33,21 @@ namespace alphaCalc
             _operateCode = -1;
         }
 
+        /// <summary>
+        /// 2023.07.21 D.Honjyou
+        /// 演算記号コードを返す
+        /// </summary>
+        /// <returns></returns>
         public int GetOperate() 
         { 
             return _operateCode; 
         }
 
+        /// <summary>
+        /// 2023.07.21 D.Honjyou
+        /// 演算記号を文字で返す
+        /// </summary>
+        /// <returns></returns>
         public string GetOperateString()
         {
             string ret = "";
@@ -49,6 +59,12 @@ namespace alphaCalc
             return (ret);
         }
 
+        /// <summary>
+        /// 2023.07.21 D.Honjyou
+        /// 演算記号コードから文字を取得
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public string GetOperateStringFromCode(int c)
         {
             string ret = "";
@@ -60,6 +76,11 @@ namespace alphaCalc
             return (ret);
         }
 
+        /// <summary>
+        /// 演算をセットする
+        /// </summary>
+        /// <param name="op">演算記号</param>
+        /// <returns></returns>
         public bool SetOperate(string op)
         {
             bool result = false;
@@ -80,6 +101,11 @@ namespace alphaCalc
             return result;
         }
 
+        /// <summary>
+        /// 2023.07.21 D.Honjyou
+        /// クラス複製用のコピー作成
+        /// </summary>
+        /// <returns>CalcOperateクラス</returns>
         public CalcOperate ShallowCopy()
         {
             return((CalcOperate)MemberwiseClone());

@@ -42,6 +42,10 @@ namespace alphaCalc
             System.Diagnostics.Debug.WriteLine("リセット");
         }
 
+        /// <summary>
+        /// 2023.07.21 D.Honjyou
+        /// 履歴データを登録
+        /// </summary>
         public void setNowHist()
         {
             History.AddHistData(_currentFormula);
@@ -142,6 +146,14 @@ namespace alphaCalc
             return(result);
         }
 
+        /// <summary>
+        /// 2023.07.21 D.Honjyou
+        /// 四則演算実行処理
+        /// </summary>
+        /// <param name="ope">演算記号</param>
+        /// <param name="n1">これまでの計算結果</param>
+        /// <param name="n2">演算する数値</param>
+        /// <returns></returns>
         private double RunCalc(int ope, double n1, double n2)
         {
             switch (ope)
@@ -165,6 +177,12 @@ namespace alphaCalc
             return n1;
         }
 
+        /// <summary>
+        /// 2023.07.21 D.Honjyou
+        /// プラスマイナスを追加する
+        /// </summary>
+        /// <param name="op">演算記号</param>
+        /// <returns></returns>
         public bool AddPM(string op)
         {
             bool result = false;
@@ -185,6 +203,12 @@ namespace alphaCalc
 
             return result;
         }
+
+        /// <summary>
+        /// 演算を追加する
+        /// </summary>
+        /// <param name="op">演算記号</param>
+        /// <returns></returns>
         public bool AddOperate(string op)
         {
             bool result = false;
@@ -210,19 +234,11 @@ namespace alphaCalc
                 _currentNum = 0;
                 _currentNumString = "0";
 
-                System.Diagnostics.Debug.WriteLine($"????{_currentNum}");
+                //System.Diagnostics.Debug.WriteLine($"????{_currentNum}");
                 return result;
             }
-            /**
-            if (_currentOperate.GetOperate() == Operates.Operate_PM)
-            {
-                _currentResult *= -1;
-                _currentFormula += "×(-1)";
-                System.Diagnostics.Debug.WriteLine($"????{_currentNum}");
-                return result;
-            }
-            **/
-            System.Diagnostics.Debug.WriteLine($"<---pOpe:{_preOperate.GetOperate()} cOpe:{_currentOperate.GetOperate()}");
+            
+            //System.Diagnostics.Debug.WriteLine($"<---pOpe:{_preOperate.GetOperate()} cOpe:{_currentOperate.GetOperate()}");
             if (_preMode == 0)
             {
                 if (_preOperate.GetOperate() == Operates.Operate_NONE)

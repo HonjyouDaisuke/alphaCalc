@@ -52,6 +52,12 @@ namespace alphaCalc
             k_back.IsEnabled = true;
         }
 
+        /// <summary>
+        /// 2023.07.21 D.Honjyou
+        /// +/-ボタンキーが押された時
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PMClick(object sender, RoutedEventArgs e)
         {
             Button b = (Button)sender;
