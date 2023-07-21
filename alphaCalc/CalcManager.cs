@@ -219,11 +219,18 @@ namespace alphaCalc
             System.Diagnostics.Debug.WriteLine($"<---pOpe:{_preOperate.GetOperate()} cOpe:{_currentOperate.GetOperate()}");
 
             _currentOperate.SetOperate(op);
-            System.Diagnostics.Debug.WriteLine($"★{op}, {_currentOperate.GetOperate()}");
+            
             if(_currentOperate.GetOperate() == Operates.Operate_CA)
             {
-                if(_currentFormula.Length > 0)
+                System.Diagnostics.Debug.WriteLine($"▼pre{_prevOperate}, pre2={_preOperate.GetOperate()} cur{_currentOperate.GetOperate()}");
+                if (_currentFormula.Length > 0 && _preOperate.GetOperate() == Operates.Operate_EQUAL)
                 {
+                    ResetCalc();
+                }
+                else if (_currentFormula.Length > 0)
+                {
+                    _currentResult = RunCalc(_preOperate.GetOperate(), _currentResult, _currentNum);
+                    _currentFormula += $" {_preOperate.GetOperateString()} {_currentNum}";
                     ResetCalc();
                 }
                 
