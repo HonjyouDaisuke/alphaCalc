@@ -20,7 +20,7 @@ namespace alphaCalc
         double _currentNum;
         double _preNum;
         int _preMode = 0;   //mode:0 = number   1 = Operate 
-        int _prevOperate;
+        Operates _prevOperate;
         HistoryData _history = new HistoryData();
 
 
@@ -83,8 +83,8 @@ namespace alphaCalc
             {
                 _currentNum = 0;
                 _currentNumString = "";
-                System.Diagnostics.Debug.WriteLine($"式の後の数字です。　前式{_preOperate.GetOperateString()} 前式２{_preOperate.GetOperateStringFromCode(_prevOperate)}");
-                if (_preOperate.GetOperate() == Operates.Operate_EQUAL)
+                System.Diagnostics.Debug.WriteLine($"式の後の数字です。　前式{_preOperate.GetOperateString()} 前式２{CalcOperate.GetOperateStringFromCode(_prevOperate)}");
+                if (_preOperate.OperateCode == Operates.Equal)
                 {
                     ResetCalc();
                 }
@@ -154,23 +154,23 @@ namespace alphaCalc
         /// <param name="n1">これまでの計算結果</param>
         /// <param name="n2">演算する数値</param>
         /// <returns></returns>
-        private double RunCalc(int ope, double n1, double n2)
+        private double RunCalc(Operates ope, double n1, double n2)
         {
             switch (ope)
             {
-                case Operates.Operate_PLUS: // +
+                case Operates.Plus: // +
                     n1 += n2;
                     break;
 
-                case Operates.Operate_MINUS: // -
+                case Operates.Minus: // -
                     n1 -= n2;
                     break;
 
-                case Operates.Operate_MULT: // ×
+                case Operates.Mult: // ×
                     n1 *= n2;
                     break;
 
-                case Operates.Operate_PER: // ÷
+                case Operates.Per: // ÷
                     n1 /= n2;
                     break;
             }
@@ -216,27 +216,27 @@ namespace alphaCalc
             //_preOperate = _currentOperate;
             //_preNum = _currentNum;
 
-            System.Diagnostics.Debug.WriteLine($"<---pOpe:{_preOperate.GetOperate()} cOpe:{_currentOperate.GetOperate()}");
+            System.Diagnostics.Debug.WriteLine($"<---pOpe:{_preOperate.OperateCode} cOpe:{_currentOperate.OperateCode}");
 
             _currentOperate.SetOperate(op);
             
-            if(_currentOperate.GetOperate() == Operates.Operate_CA)
+            if(_currentOperate.OperateCode == Operates.Ca)
             {
-                System.Diagnostics.Debug.WriteLine($"▼pre{_prevOperate}, pre2={_preOperate.GetOperate()} cur{_currentOperate.GetOperate()}");
-                if (_currentFormula.Length > 0 && _preOperate.GetOperate() == Operates.Operate_EQUAL)
+                System.Diagnostics.Debug.WriteLine($"▼pre{_prevOperate}, pre2={_preOperate.OperateCode} cur{_currentOperate.OperateCode}");
+                if (_currentFormula.Length > 0 && _preOperate.OperateCode == Operates.Equal)
                 {
                     ResetCalc();
                 }
                 else if (_currentFormula.Length > 0)
                 {
-                    _currentResult = RunCalc(_preOperate.GetOperate(), _currentResult, _currentNum);
+                    _currentResult = RunCalc(_preOperate.OperateCode, _currentResult, _currentNum);
                     _currentFormula += $" {_preOperate.GetOperateString()} {_currentNum}";
                     ResetCalc();
                 }
                 
                 return result;
             }
-            if (_currentOperate.GetOperate() == Operates.Operate_C)
+            if (_currentOperate.OperateCode == Operates.C)
             {
                 _currentNum = 0;
                 _currentNumString = "0";
@@ -248,7 +248,7 @@ namespace alphaCalc
             //System.Diagnostics.Debug.WriteLine($"<---pOpe:{_preOperate.GetOperate()} cOpe:{_currentOperate.GetOperate()}");
             if (_preMode == 0)
             {
-                if (_preOperate.GetOperate() == Operates.Operate_NONE)
+                if (_preOperate.OperateCode == Operates.None)
                 {
                     _currentResult = _currentNum;
                     if (double.TryParse(CurrentNumString, out d_num))
@@ -265,19 +265,19 @@ namespace alphaCalc
                 }
                 else
                 {
-                    _currentResult = RunCalc(_preOperate.GetOperate(), _currentResult, _currentNum);
+                    _currentResult = RunCalc(_preOperate.OperateCode, _currentResult, _currentNum);
                     _currentFormula += $" {_preOperate.GetOperateString()} {_currentNum}";
-                    _prevOperate = _preOperate.GetOperate();
+                    _prevOperate = _preOperate.OperateCode;
                     result = true;
                 }
             }
             else
             {
                 _preOperate.SetOperate(op);
-                if(_currentOperate.GetOperate() == Operates.Operate_EQUAL && _preOperate.GetOperate() == Operates.Operate_EQUAL)
+                if(_currentOperate.OperateCode == Operates.Equal && _preOperate.OperateCode == Operates.Equal)
                 {
                     _currentResult = RunCalc(_prevOperate, _currentResult, _preNum);
-                    _currentFormula += $" {_currentOperate.GetOperateStringFromCode(_prevOperate)} {_preNum}";
+                    _currentFormula += $" {CalcOperate.GetOperateStringFromCode(_prevOperate)} {_preNum}";
                     result = true;
                 }
             }
@@ -287,7 +287,7 @@ namespace alphaCalc
                 _currentNumString = _currentResult.ToString();
                 _preOperate = _currentOperate.ShallowCopy();
                 _preNum = _currentNum;
-                System.Diagnostics.Debug.WriteLine($"--->pOpe:{_preOperate.GetOperate()} pNum:{_preNum} cOpe:{_currentOperate.GetOperate()} cNum:{_currentNum} cNumS:{_currentNumString}");
+                System.Diagnostics.Debug.WriteLine($"--->pOpe:{_preOperate.OperateCode} pNum:{_preNum} cOpe:{_currentOperate.OperateCode} cNum:{_currentNum} cNumS:{_currentNumString}");
 
             }
 
